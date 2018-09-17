@@ -40,7 +40,11 @@ For automated polls:
 
 == Changelog ==
 
+= 0.1.1 =
+
+* use "WordPress-VIP" coding standard (from https://github.com/Automattic/VIP-Coding-Standards)
+* add namespaces
+
 = 0.1.0 =
-*Release Date - Sept 2018*
 
 * basic implementation of opinary tags for normal and automated polls
