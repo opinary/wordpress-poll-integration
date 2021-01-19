@@ -11,6 +11,7 @@ require_once OPINARY_PLUGIN_PATH . 'includes/class-tag-attributes.php';
 class Embed_Code_Generator {
 	const OPINARY_POLL_URL_TEMPLATE = 'https://compass.pressekompass.net/compasses/%s/%s';
 	const OPINARY_STATIC_SCRIPT_URL = '//compass.pressekompass.net/static/opinary.js';
+	const OPINARY_EMBED_SCRIPT = '//widgets.opinary.com/embed.js';
 
 	/**
 	 * @param string $attributes_string
@@ -79,20 +80,14 @@ class Embed_Code_Generator {
 	 * @return string
 	 */
 	protected function create_ebmed_code_normal( Tag_Attributes $opinary_tag_attributes ) {
-		$poll_url = sprintf(
-			self::OPINARY_POLL_URL_TEMPLATE,
-			$opinary_tag_attributes->get_customer(),
-			$opinary_tag_attributes->get_poll_id()
-		);
-		$poll_url = esc_url( $poll_url );
+		$poll_id = $opinary_tag_attributes->get_poll_id();
+		$customer_id = $opinary_tag_attributes->get_customer();
+
+		wp_enqueue_script( 'opinary_embed', self::OPINARY_EMBED_SCRIPT );
 
 		$embed_code = <<<EMBED_CODE
-<div class="opinary-widget-wrapper" style="width: 100%; max-width: 500px; height:100%; margin:0 auto;">
-  <div class="opinary-widget" style="position:relative; padding-top: 100%;">
-    <iframe class="opinary-iframe" width="100%" height="400px" src="${poll_url}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" frameborder="0"> </iframe>
-  </div>
-</div>
-EMBED_CODE;
+		<div class="opinary-widget-embed" data-poll="${poll_id}" data-customer="${customer_id}"></div>
+		EMBED_CODE;
 
 		return $embed_code;
 	}
