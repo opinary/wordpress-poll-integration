@@ -40,6 +40,10 @@ For automated polls:
 
 == Changelog ==
 
+= 0.1.2 =
+
+* Use embed widget
+
 = 0.1.1 =
 
 * use "WordPress-VIP" coding standard (from https://github.com/Automattic/VIP-Coding-Standards)
